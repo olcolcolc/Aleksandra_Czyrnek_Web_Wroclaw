@@ -1,0 +1,48 @@
+.cart-item-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem;
+  border-bottom: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+.cart-item-name {
+  flex: 2;
+  font-weight: 500;
+}
+
+.cart-item-quantity {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.cart-item-quantity input {
+  width: 60px;
+  text-align: center;
+  padding: 0.4rem;
+  font-size: 1rem;
+  border: 1px solid #bbb;
+  border-radius: 4px;
+}
+
+.cart-item-price {
+  flex: 1;
+  text-align: right;
+  font-weight: 600;
+}
+
+.remove-btn {
+  flex: 0;
+  background: none;
+  border: none;
+  font-size: 1.25rem;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.remove-btn:hover {
+  color: #ff4444;
+}
