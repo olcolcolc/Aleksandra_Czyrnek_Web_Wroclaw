@@ -1,7 +1,7 @@
 import React from "react";
 import products from "../../data/products.json";
 import ProductCard from "../ProductCard/ProductCard";
-import type { Product } from "../../types/product";
+import type { Product } from "../../types";
 import "./ProductList.css";
 
 type Props = {

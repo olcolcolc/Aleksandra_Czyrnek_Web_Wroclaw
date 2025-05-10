@@ -1,45 +1,34 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   BrowserRouter as Router,
   Routes,
   Route,
   useNavigate,
 } from "react-router-dom";
+import { useSelector } from "react-redux";
+import type { RootState } from "./store/store";
 import CartButton from "./components/CartButton/CartButton";
 import LandingPage from "./pages/LandingPage";
 import CartPage from "./pages/CartPage";
-import type { Product } from "./types/product";
 import "./App.css";
 
 const AppContent: React.FC = () => {
-  const [cartItems, setCartItems] = useState<Product[]>([]);
   const navigate = useNavigate();
-
-  const handleAddToCart = (product: Product) => {
-    setCartItems((prev) => [...prev, product]);
-  };
+  const cartItems = useSelector((state: RootState) => state.cart.items);
 
   return (
     <div className="app">
       <header className="header">
         <CartButton
-          itemCount={cartItems.length}
+          itemCount={cartItems.reduce((sum, item) => sum + item.quantity, 0)}
           onClick={() => navigate("/cart")}
         />
       </header>
 
       <main>
         <Routes>
-          <Route
-            path="/"
-            element={<LandingPage onAddToCart={handleAddToCart} />}
-          />
-          <Route
-            path="/cart"
-            element={
-              <CartPage cartItems={cartItems} setCartItems={setCartItems} />
-            }
-          />
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/cart" element={<CartPage />} />
         </Routes>
       </main>
     </div>
