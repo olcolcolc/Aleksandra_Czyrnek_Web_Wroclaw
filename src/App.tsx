@@ -1,32 +1,56 @@
 import React, { useState } from "react";
-import ProductList from "./components/ProductList/ProductList";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useNavigate,
+} from "react-router-dom";
 import CartButton from "./components/CartButton/CartButton";
+import LandingPage from "./pages/LandingPage";
+import CartPage from "./pages/CartPage";
 import type { Product } from "./types/product";
 import "./App.css";
 
-const App: React.FC = () => {
+const AppContent: React.FC = () => {
   const [cartItems, setCartItems] = useState<Product[]>([]);
+  const navigate = useNavigate();
 
   const handleAddToCart = (product: Product) => {
     setCartItems((prev) => [...prev, product]);
   };
 
-  const handleCartClick = () => {
-    alert(`Masz ${cartItems.length} produktów w koszyku.`);
-  };
-
   return (
     <div className="app">
       <header className="header">
-        <CartButton itemCount={cartItems.length} onClick={handleCartClick} />
+        <CartButton
+          itemCount={cartItems.length}
+          onClick={() => navigate("/cart")}
+        />
       </header>
 
       <main>
-        <div className="content">
-          <ProductList onAddToCart={handleAddToCart} />
-        </div>
+        <Routes>
+          <Route
+            path="/"
+            element={<LandingPage onAddToCart={handleAddToCart} />}
+          />
+          <Route
+            path="/cart"
+            element={
+              <CartPage cartItems={cartItems} setCartItems={setCartItems} />
+            }
+          />
+        </Routes>
       </main>
     </div>
+  );
+};
+
+const App: React.FC = () => {
+  return (
+    <Router>
+      <AppContent />
+    </Router>
   );
 };
 
