@@ -1,15 +1,19 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../store/cartSlice";
 import ProductList from "../components/ProductList/ProductList";
-import type { Product } from "../types/product";
+import type { Product } from "../types";
 
-type Props = {
-  onAddToCart: (product: Product) => void;
-};
+const LandingPage: React.FC = () => {
+  const dispatch = useDispatch();
 
-const LandingPage: React.FC<Props> = ({ onAddToCart }) => {
+  const handleAddToCart = (product: Product) => {
+    dispatch(addToCart(product));
+  };
+
   return (
     <div className="landing-page">
-      <ProductList onAddToCart={onAddToCart} />
+      <ProductList onAddToCart={handleAddToCart} />
     </div>
   );
 };

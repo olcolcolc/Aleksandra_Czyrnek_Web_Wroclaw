@@ -1,42 +1,41 @@
 import React, { useEffect, useState } from "react";
-import type { Product } from "../../types/product";
+import { useDispatch } from "react-redux";
+import { updateQuantity, removeFromCart } from "../../store";
+import type { Product } from "../../types";
 import "./CartItemRow.css";
 
 type Props = {
   product: Product;
   quantity: number;
-  onQuantityChange: (newQuantity: number) => void;
-  onRemove: () => void;
 };
 
-const CartItemRow: React.FC<Props> = ({
-  product,
-  quantity,
-  onQuantityChange,
-  onRemove,
-}) => {
+const CartItemRow: React.FC<Props> = ({ product, quantity }) => {
+  const dispatch = useDispatch();
   const [inputValue, setInputValue] = useState(quantity.toString());
 
   useEffect(() => {
-    // Synchronize input if quantity changes from the outside
     setInputValue(quantity.toString());
   }, [quantity]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    setInputValue(value); // Allow the input to be temporarily empty while typing
+    setInputValue(value);
 
     const parsed = parseInt(value, 10);
     if (!isNaN(parsed) && parsed > 0) {
-      onQuantityChange(parsed);
+      dispatch(updateQuantity({ id: product.id, quantity: parsed }));
     }
   };
 
   const handleBlur = () => {
     const parsed = parseInt(inputValue, 10);
     if (isNaN(parsed) || parsed <= 0) {
-      setInputValue(quantity.toString()); // Show previous value
+      setInputValue(quantity.toString());
     }
+  };
+
+  const handleRemove = () => {
+    dispatch(removeFromCart(product.id));
   };
 
   const pricePerItem = product.price.main * 100 + product.price.fractional;
@@ -55,7 +54,7 @@ const CartItemRow: React.FC<Props> = ({
         />
       </div>
       <span className="cart-item-price">{subtotal.toFixed(2)} zł</span>
-      <button className="remove-btn" onClick={onRemove}>
+      <button className="remove-btn" onClick={handleRemove}>
         🗑
       </button>
     </div>
