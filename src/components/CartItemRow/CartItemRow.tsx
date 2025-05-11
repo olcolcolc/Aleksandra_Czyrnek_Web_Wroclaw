@@ -49,6 +49,7 @@ const CartItemRow: React.FC<Props> = ({ product, quantity }) => {
           type="number"
           value={inputValue}
           min={1}
+          pattern="\\d+"
           onChange={handleInputChange}
           onBlur={handleBlur}
         />
