@@ -1,13 +1,11 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { clearCart } from "../store";
 import type { RootState } from "../store/store";
 import ShoppingSummary from "../components/ShoppingSummary/ShoppingSummary";
 
 const CheckoutPage: React.FC = () => {
   const cartItems = useSelector((state: RootState) => state.cart.items);
-  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const total = cartItems.reduce((sum, item) => {
@@ -32,8 +30,7 @@ const CheckoutPage: React.FC = () => {
       )
     );
 
-    dispatch(clearCart());
-    window.location.href = "/";
+    window.location.href = "/confirmation.html";
   };
 
   return (
@@ -41,33 +38,29 @@ const CheckoutPage: React.FC = () => {
       <button onClick={() => navigate("/cart")}>← Wróć do koszyka</button>
       <h1>Podsumowanie zamówienia</h1>
 
-      {cartItems.length === 0 ? (
-        <p>Twój koszyk jest pusty.</p>
-      ) : (
-        <div className="checkout-page__items">
-          <ul>
-            {cartItems.map((item) => {
-              const unit =
-                item.product.price.main * 100 + item.product.price.fractional;
-              const subtotal = (unit * item.quantity) / 100;
+      <div className="checkout-page__items">
+        <ul>
+          {cartItems.map((item) => {
+            const unit =
+              item.product.price.main * 100 + item.product.price.fractional;
+            const subtotal = (unit * item.quantity) / 100;
 
-              return (
-                <li key={item.product.id}>
-                  <strong>{item.product.name}</strong> – {item.quantity} szt. –{" "}
-                  {subtotal.toFixed(2)} zł
-                </li>
-              );
-            })}
-          </ul>
+            return (
+              <li key={item.product.id}>
+                <strong>{item.product.name}</strong> – {item.quantity} szt. –{" "}
+                {subtotal.toFixed(2)} zł
+              </li>
+            );
+          })}
+        </ul>
 
-          <ShoppingSummary
-            total={total}
-            onConfirm={handleOrderSubmit}
-            confirmDisabled={cartItems.length === 0}
-            confirmLabel="Złóż zamówienie"
-          />
-        </div>
-      )}
+        <ShoppingSummary
+          total={total}
+          onConfirm={handleOrderSubmit}
+          confirmDisabled={cartItems.length === 0}
+          confirmLabel="Złóż zamówienie"
+        />
+      </div>
     </div>
   );
 };
