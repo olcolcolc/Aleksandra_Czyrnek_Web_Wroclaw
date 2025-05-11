@@ -5,7 +5,17 @@
   padding: 1rem;
 }
 
-.header {
+header {
   display: flex;
   justify-content: flex-end;
+}
+
+main {
+  padding: 2rem;
+}
+
+@media (max-width: 600px) {
+  main {
+    padding: 0.5rem;
+  }
 }

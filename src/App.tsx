@@ -11,6 +11,7 @@ import CartButton from "./components/CartButton/CartButton";
 import LandingPage from "./pages/LandingPage";
 import CartPage from "./pages/CartPage";
 import "./App.css";
+import CheckoutPage from "./pages/CheckoutPage";
 
 const AppContent: React.FC = () => {
   const navigate = useNavigate();
@@ -29,6 +30,7 @@ const AppContent: React.FC = () => {
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/cart" element={<CartPage />} />
+          <Route path="/checkout" element={<CheckoutPage />} />
         </Routes>
       </main>
     </div>
