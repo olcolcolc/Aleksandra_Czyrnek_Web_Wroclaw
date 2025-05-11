@@ -1,54 +1,74 @@
-# React + TypeScript + Vite
+# 🛒 Online Shop - Aleksandra Czyrnek
+Recruitment task
+A simple e-commerce SPA built with React, TypeScript, Redux Toolkit, and Vite. The app allows users to browse products, manage their shopping cart, complete a checkout process, and receive an order confirmation.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+---
 
-Currently, two official plugins are available:
+## 🚀 Technologies
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **React + Vite** - for fast SPA development
+- **TypeScript** - type safety
+- **Redux Toolkit** - global state management
+- **React Router DOM** - page routing
+- **localStorage** - cart/order persistence
+- **CSS** - responsive styling (mobile-friendly)
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 📂 Project Structure
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+```
+/public
+  confirmation.html   # final standalone confirmation page
+  confirmation.css
+  confirmation.js
+/src
+  /components
+    ProductCard, ProductList, CartItemRow, CartButton, ShoppingSummary
+  /pages
+    LandingPage, CartPage, CheckoutPage
+  /store
+    store.ts, cartSlice.ts
+  /types
+    product.ts, cartItem.ts
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## ✨ Features
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+### 🛍 Product List (LandingPage)
+- Displays static list of products from JSON
+- Each product has name, price, and "Add to cart" button
+
+### 🛒 Cart Page
+- Displays grouped cart items with quantity controls
+- Supports removing items and quantity editing
+- Displays subtotal and total
+- Navigate to checkout
+
+### ✅ Checkout Page
+- Displays a summary of current cart
+- Stores the final order in `localStorage`
+- Redirects to `confirmation.html`
+
+### 📦 Confirmation Page
+- Loads order from `localStorage`
+- Displays order items and total
+- Handles empty state
+- Link to return to shop
+
+---
+
+## 🔧 Getting Started
+
+```bash
+npm install
+npm run dev         # run local server
 ```
+
+### Manual deploy to GitHub Pages:
+- `vite.config.ts` base is set for GitHub Pages
+- Copy `dist/` to root of `gh-pages` branch
+- Push to GitHub
+
