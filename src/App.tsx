@@ -38,8 +38,16 @@ const AppContent: React.FC = () => {
 };
 
 const App: React.FC = () => {
+  const getBaseUrl = () => {
+    if (import.meta.env.MODE === "development") {
+      return "/";
+    } else {
+      return "/Aleksandra_Czyrnek_Web_Wroclaw";
+    }
+  };
+
   return (
-    <Router basename="Aleksandra_Czyrnek_Web_Wroclaw">
+    <Router basename={getBaseUrl()}>
       <AppContent />
     </Router>
   );
