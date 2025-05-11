@@ -1,8 +1,6 @@
-# 🛒 Online Shop - Aleksandra Czyrnek
+# 🛒 Online Shop Sample
 Recruitment task
 A simple e-commerce SPA built with React, TypeScript, Redux Toolkit, and Vite. The app allows users to browse products, manage their shopping cart, complete a checkout process, and receive an order confirmation.
-
----
 
 ## 🚀 Technologies
 
@@ -12,8 +10,6 @@ A simple e-commerce SPA built with React, TypeScript, Redux Toolkit, and Vite. T
 - **React Router DOM** - page routing
 - **localStorage** - cart/order persistence
 - **CSS** - responsive styling (mobile-friendly)
-
----
 
 ## 📂 Project Structure
 
@@ -32,8 +28,6 @@ A simple e-commerce SPA built with React, TypeScript, Redux Toolkit, and Vite. T
   /types
     product.ts, cartItem.ts
 ```
-
----
 
 ## ✨ Features
 
@@ -67,8 +61,11 @@ npm install
 npm run dev         # run local server
 ```
 
-### Manual deploy to GitHub Pages:
-- `vite.config.ts` base is set for GitHub Pages
-- Copy `dist/` to root of `gh-pages` branch
-- Push to GitHub
+## 🔄 Notes
+- Project includes an environment-based configuration to handle routing and asset paths correctly. It automatically adjusts the base URL depending on whether it's running locally or in production (GitHub Pages). This ensures smooth navigation and asset loading in both environments.
+- Confirmation page is not part of SPA routing – it's a separate full reload HTML page.
 
+## 🔗 Live Demo
+
+Deployed on GitHub Pages:  
+https://olcolcolc.github.io/Aleksandra_Czyrnek_Web_Wroclaw/
