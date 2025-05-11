@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import type { RootState } from "../store/store";
 import CartItemRow from "../components/CartItemRow/CartItemRow";
+import ShoppingSummary from "../components/ShoppingSummary/ShoppingSummary";
 
 const CartPage: React.FC = () => {
   const navigate = useNavigate();
@@ -21,7 +22,7 @@ const CartPage: React.FC = () => {
       {cartItems.length === 0 ? (
         <p>Koszyk jest pusty.</p>
       ) : (
-        <div className="cart-list">
+        <div className="cart-page__list">
           {cartItems.map((item) => (
             <CartItemRow
               key={item.product.id}
@@ -32,8 +33,12 @@ const CartPage: React.FC = () => {
         </div>
       )}
 
-      <p>Łącznie: {(total / 100).toFixed(2)} zł</p>
-      <button onClick={() => navigate("/checkout")}>Podsumuj</button>
+      <ShoppingSummary
+        total={total}
+        onConfirm={() => navigate("/checkout")}
+        confirmLabel="Podsumuj"
+        confirmDisabled={cartItems.length === 0}
+      />
     </div>
   );
 };
