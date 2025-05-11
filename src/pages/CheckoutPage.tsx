@@ -1,4 +1,3 @@
-import React from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import type { RootState } from "../store/store";
@@ -29,6 +28,8 @@ const CheckoutPage: React.FC = () => {
         }))
       )
     );
+
+    localStorage.removeItem("cart");
 
     window.location.href = "/confirmation.html";
   };

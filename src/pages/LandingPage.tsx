@@ -1,4 +1,3 @@
-import React from "react";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../store/cartSlice";
 import ProductList from "../components/ProductList/ProductList";
